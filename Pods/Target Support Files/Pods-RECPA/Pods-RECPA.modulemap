@@ -1,0 +1,6 @@
+framework module Pods_RECPA {
+  umbrella header "Pods-RECPA-umbrella.h"
+
+  export *
+  module * { export * }
+}

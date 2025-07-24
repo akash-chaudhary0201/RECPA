@@ -1,0 +1,32 @@
+PODS:
+  - AEOTPTextField (1.2.6)
+  - DPOTPView (1.5.12)
+  - DropDown (2.3.13)
+  - OTPFieldView (1.0.1)
+  - SideMenu (6.5.0)
+
+DEPENDENCIES:
+  - AEOTPTextField
+  - DPOTPView
+  - DropDown
+  - OTPFieldView
+  - SideMenu
+
+SPEC REPOS:
+  trunk:
+    - AEOTPTextField
+    - DPOTPView
+    - DropDown
+    - OTPFieldView
+    - SideMenu
+
+SPEC CHECKSUMS:
+  AEOTPTextField: a275823fde05601c5da7f8fb66aaecb41289b370
+  DPOTPView: 28d8a0a84a2ff4b1e4a7712065aba1cbb14e2704
+  DropDown: 8a2116376c1981888557f72ec2ffc9a5e0e456ec
+  OTPFieldView: 700a752fe62c41d1c4914c78aa500fb30d97c255
+  SideMenu: f583187d21c5b1dd04c72002be544b555a2627a2
+
+PODFILE CHECKSUM: a4b004e44a89aafbc03a823a2ba5f6d57835fefe
+
+COCOAPODS: 1.16.2
