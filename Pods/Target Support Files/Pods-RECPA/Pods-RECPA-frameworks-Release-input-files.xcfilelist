@@ -2,5 +2,7 @@ ${PODS_ROOT}/Target Support Files/Pods-RECPA/Pods-RECPA-frameworks.sh
 ${BUILT_PRODUCTS_DIR}/AEOTPTextField/AEOTPTextField.framework
 ${BUILT_PRODUCTS_DIR}/DPOTPView/DPOTPView.framework
 ${BUILT_PRODUCTS_DIR}/DropDown/DropDown.framework
+${BUILT_PRODUCTS_DIR}/FSPagerView/FSPagerView.framework
 ${BUILT_PRODUCTS_DIR}/OTPFieldView/OTPFieldView.framework
 ${BUILT_PRODUCTS_DIR}/SideMenu/SideMenu.framework
+${BUILT_PRODUCTS_DIR}/SwiftyGif/SwiftyGif.framework

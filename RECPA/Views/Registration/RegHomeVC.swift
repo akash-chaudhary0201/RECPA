@@ -8,7 +8,9 @@
 import UIKit
 
 class RegHomeVC: UIViewController {
-
+    
+    @IBOutlet weak var fileImage: UIImageView!
+    
     @IBOutlet weak var secondStepView: UIView!
     @IBOutlet weak var thirdStepView: UIView!
     @IBOutlet weak var stepView: UIView!
@@ -17,13 +19,11 @@ class RegHomeVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
     }
     
     @IBAction func backAction(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
-    
     
     @IBAction func goToBasicInfo(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Registration", bundle: nil)

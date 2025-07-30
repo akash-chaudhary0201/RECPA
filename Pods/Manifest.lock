@@ -2,31 +2,39 @@ PODS:
   - AEOTPTextField (1.2.6)
   - DPOTPView (1.5.12)
   - DropDown (2.3.13)
+  - FSPagerView (0.8.3)
   - OTPFieldView (1.0.1)
   - SideMenu (6.5.0)
+  - SwiftyGif (5.4.5)
 
 DEPENDENCIES:
   - AEOTPTextField
   - DPOTPView
   - DropDown
+  - FSPagerView
   - OTPFieldView
   - SideMenu
+  - SwiftyGif
 
 SPEC REPOS:
   trunk:
     - AEOTPTextField
     - DPOTPView
     - DropDown
+    - FSPagerView
     - OTPFieldView
     - SideMenu
+    - SwiftyGif
 
 SPEC CHECKSUMS:
   AEOTPTextField: a275823fde05601c5da7f8fb66aaecb41289b370
   DPOTPView: 28d8a0a84a2ff4b1e4a7712065aba1cbb14e2704
   DropDown: 8a2116376c1981888557f72ec2ffc9a5e0e456ec
+  FSPagerView: 670405b2f18e2a87fa37f20b00de783e562c25a8
   OTPFieldView: 700a752fe62c41d1c4914c78aa500fb30d97c255
   SideMenu: f583187d21c5b1dd04c72002be544b555a2627a2
+  SwiftyGif: 706c60cf65fa2bc5ee0313beece843c8eb8194d4
 
-PODFILE CHECKSUM: a4b004e44a89aafbc03a823a2ba5f6d57835fefe
+PODFILE CHECKSUM: e41848112e157b4afc7151036494e97d79719cf4
 
 COCOAPODS: 1.16.2

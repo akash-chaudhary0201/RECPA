@@ -20,7 +20,19 @@ class ProjectsVC: UIViewController {
     
     var isFilterOpen:Bool = false
     
+    var dynamicHeight:Double?
+    var screenHeight:Double?
+    
     override func viewDidLoad() {
+        
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: allProjectTable.frame.width, height: 100))
+        footerView.backgroundColor = .clear
+        
+        allProjectTable.tableFooterView = footerView
+        
+        screenHeight = UIScreen.main.bounds.height
+        dynamicHeight = screenHeight! * 0.4
+        
         super.viewDidLoad()
         
         allProjectTable.separatorStyle = .none
@@ -35,8 +47,6 @@ class ProjectsVC: UIViewController {
                 DispatchQueue.main.async {
                     if status{
                         self.allProjectTable.reloadData()
-                        self.allProjectTable.rowHeight = UITableView.automaticDimension
-                        self.allProjectTable.estimatedRowHeight = 300
                         print(self.allProjectTable.rowHeight)
                         SwiftLoader.hide()
                     }
@@ -51,13 +61,13 @@ class ProjectsVC: UIViewController {
             filterCollection.isHidden = true
             filterCollectionHeight.constant = 0
             openFilterButton.backgroundColor = .white
-            openFilterButton.setImage(UIImage(named: "greenFilter"), for: .normal)
+            openFilterButton.setImage(UIImage(named: "filterGreen"), for: .normal)
             isFilterOpen = false
         }else{
             filterCollection.isHidden = false
             filterCollectionHeight.constant = 36
             openFilterButton.backgroundColor = UIColor(red: 35/255, green: 75/255, blue: 52/255, alpha: 255/255)
-            openFilterButton.setImage(UIImage(named: "hh"), for: .normal)
+            openFilterButton.setImage(UIImage(named: "filterWhite"), for: .normal)
             
             print("Background image set to filterWhite")
             isFilterOpen = true
@@ -85,7 +95,12 @@ extension ProjectsVC:UITableViewDelegate, UITableViewDataSource{
         cell.projectBudget.text = singleProperty.budget
         cell.projectStatus.text = singleProperty.status
         cell.projectRooms.text = singleProperty.rooms
+        cell.imageHeight.constant = dynamicHeight! - 150.0
+        
         return cell
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return dynamicHeight!
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -96,6 +111,7 @@ extension ProjectsVC:UITableViewDelegate, UITableViewDataSource{
             self.navigationController?.pushViewController(nextController, animated: true)
         }
     }
+
 }
 
 //Extension for collection:
@@ -114,6 +130,8 @@ extension ProjectsVC:UICollectionViewDelegate, UICollectionViewDataSource{
 }
 
 class AllProjectTableCell:UITableViewCell{
+    
+    @IBOutlet weak var imageHeight: NSLayoutConstraint!
     @IBOutlet weak var projectImage: UIImageView!
     @IBOutlet weak var projectName: UILabel!
     @IBOutlet weak var projectAddress: UILabel!

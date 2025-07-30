@@ -6,24 +6,18 @@
 //
 
 import UIKit
+import WebKit
 
 class ProfEx: UIViewController {
-
+    
+    @IBOutlet weak var webView: WKWebView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        if let url = URL(string: "https://pg.its.edu.in/sites/all/themes/extrude/video/old/tour.html") {
+            webView.load(URLRequest(url: url))
+        }
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

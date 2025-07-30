@@ -12,8 +12,8 @@ class MediaContainerVC: UIViewController {
     
     @IBOutlet weak var projectMainView: UIView!
     @IBOutlet weak var mainImageView: UIImageView!
+    @IBOutlet weak var mainImageHeight: NSLayoutConstraint!
     @IBOutlet weak var propInfoView: UIView!
-    @IBOutlet weak var projectImagesCollection: UICollectionView!
     
     var projectId:String?
     
@@ -25,8 +25,13 @@ class MediaContainerVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
         addBorders()
+        
+        let screenHeight = UIScreen.main.bounds.height
+        let dynamicHeight = screenHeight * 0.3
+        
+        mainImageHeight.constant = dynamicHeight
+        view.layoutIfNeeded()
     }
 
     
@@ -46,22 +51,4 @@ class MediaContainerVC: UIViewController {
         projectMainView.layer.cornerRadius = 40
         projectMainView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
     }
-}
-
-extension MediaContainerVC:UICollectionViewDelegate, UICollectionViewDataSource{
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 6
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = projectImagesCollection.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
-        
-        return cell
-    }
-    
-    
-}
-
-class ProjectImageCell:UICollectionViewCell{
-    
 }

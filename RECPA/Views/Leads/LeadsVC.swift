@@ -6,13 +6,21 @@
 //
 
 import UIKit
+import SwiftyGif
 
 class LeadsVC: UIViewController {
-
+    
+    @IBOutlet weak var comingSoon: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        do {
+            let gif = try UIImage(gifName: "cmm.gif")
+            comingSoon.setGifImage(gif, loopCount: -1)
+        } catch {
+            print("Error loading GIF: \(error)")
+        }
     }
 
 }

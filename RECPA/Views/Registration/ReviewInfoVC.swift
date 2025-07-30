@@ -38,6 +38,25 @@ class ReviewInfoVC: UIViewController {
     @IBOutlet weak var otherView: UIView!
     @IBOutlet weak var otherViewHeight: NSLayoutConstraint!
     
+    //All Info view:
+    @IBOutlet weak var mobileNumber: UILabel!
+    @IBOutlet weak var companyType: UILabel!
+    @IBOutlet weak var cpType: UILabel!
+    @IBOutlet weak var companyName: UILabel!
+    @IBOutlet weak var companyOwnerName: UILabel!
+    @IBOutlet weak var address: UILabel!
+    @IBOutlet weak var locality: UILabel!
+    @IBOutlet weak var country: UILabel!
+    @IBOutlet weak var state: UILabel!
+    @IBOutlet weak var city: UILabel!
+    @IBOutlet weak var postalCode: UILabel!
+    @IBOutlet weak var panNumber: UILabel!
+    @IBOutlet weak var aadharNumber: UILabel!
+    @IBOutlet weak var gstNumber: UILabel!
+    @IBOutlet weak var reraNumber: UILabel!
+    @IBOutlet weak var rereRegistrationDate: UILabel!
+    @IBOutlet weak var reraRenewalDate: UILabel!
+    
     //Outlet for stepper:
     @IBOutlet  var stepperView: [UIView]!
     
@@ -48,9 +67,8 @@ class ReviewInfoVC: UIViewController {
     var chequePath:String?
     var selfiePath:String?
     
-    @IBOutlet weak var gifImageView: UIImageView!
-    
     var userType:String?
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -85,13 +103,12 @@ class ReviewInfoVC: UIViewController {
             reraview.isHidden = false
             reraViewHeight.constant = 153
             gstView.isHidden = false
-            gstViewHieght.constant = 125
+            gstViewHieght.constant = 105
         }
-        
-        self.aadharPath =  UserDefaults.standard.string(forKey: "uploadedAadharFile")
-        print("-------------------------------\(aadharPath ?? "A")")
+
     }
 
+    
     @IBAction func backAction(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
@@ -149,9 +166,9 @@ class ReviewInfoVC: UIViewController {
     @IBAction func goToEditBasicDetails(_ sender: Any) {
         //Logic to jump back two vcs and once
         if let viewControllers = navigationController?.viewControllers {
-            for vc in viewControllers{
-                if vc is BasicInfoVC{
-                    navigationController?.popToViewController(vc, animated: true)
+            for vc in viewControllers {
+                if let basicVC = vc as? BasicInfoVC {
+                    navigationController?.popToViewController(basicVC, animated: true)
                     break
                 }
             }
@@ -184,4 +201,29 @@ class ReviewInfoVC: UIViewController {
         }
     }
     
+    //Function to navigate to uploaded files page:
+    @IBAction func seeUploadedFiles(_ sender: UIButton) {
+        
+        let storyboard = UIStoryboard(name: "Registration", bundle: nil)
+        if let nextController = storyboard.instantiateViewController(withIdentifier: "UploadedFilesVC") as? UploadedFilesVC {
+            let navController = UINavigationController(rootViewController: nextController)
+            switch sender.tag{
+            case 0:
+                nextController.fileType = "pan"
+            case 1:
+                nextController.fileType = "aadhar"
+            case 2:
+                nextController.fileType = "rera"
+            case 3:
+                nextController.fileType = "cheque"
+            case 4:
+                nextController.fileType = "selfie"
+            default:
+                break
+            }
+            navController.modalPresentationStyle = .overFullScreen
+            nextController.view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3966007864)
+            self.present(navController, animated: false, completion: nil)
+        }
+    }
 }

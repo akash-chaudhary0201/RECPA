@@ -11,5 +11,7 @@ target 'RECPA' do
   pod 'SideMenu'
   pod 'OTPFieldView'
   pod 'DPOTPView'
+  pod 'SwiftyGif'
+  pod 'FSPagerView'
 
 end

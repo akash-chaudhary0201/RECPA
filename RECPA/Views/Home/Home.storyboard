@@ -21,7 +21,7 @@
                                 <rect key="frame" x="0.0" y="100" width="414" height="1300"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AjX-bN-1a2">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1072.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1182.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6k4-yB-g52">
                                                 <rect key="frame" x="20" y="24" width="374" height="96"/>
@@ -639,7 +639,7 @@
                                             <constraint firstItem="aHl-7V-fp4" firstAttribute="leading" secondItem="RsE-yi-sjL" secondAttribute="leading" id="M0f-5d-8mT"/>
                                             <constraint firstItem="HSb-8d-oPj" firstAttribute="top" secondItem="blg-FX-0uT" secondAttribute="bottom" constant="20" id="MbX-R0-Jkr"/>
                                             <constraint firstItem="mmF-tD-Aur" firstAttribute="trailing" secondItem="0ba-rx-1QF" secondAttribute="trailing" id="N7E-GO-VAU"/>
-                                            <constraint firstAttribute="bottom" secondItem="pj1-wO-TOJ" secondAttribute="bottom" constant="10" id="OKk-yr-dtJ"/>
+                                            <constraint firstAttribute="bottom" secondItem="pj1-wO-TOJ" secondAttribute="bottom" constant="120" id="OKk-yr-dtJ"/>
                                             <constraint firstAttribute="trailing" secondItem="08a-5d-qtw" secondAttribute="trailing" constant="20" id="OgN-rz-1GS"/>
                                             <constraint firstAttribute="trailing" secondItem="xY8-NE-f6a" secondAttribute="trailing" constant="20" symbolic="YES" id="Plo-rF-FFH"/>
                                             <constraint firstItem="0ba-rx-1QF" firstAttribute="leading" secondItem="AjX-bN-1a2" secondAttribute="leading" constant="20" symbolic="YES" id="QpM-bu-P4t"/>
@@ -728,7 +728,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBrownColor">
-            <color red="0.63529411759999999" green="0.51764705879999995" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.63529411764705879" green="0.51764705882352946" blue="0.36862745098039218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

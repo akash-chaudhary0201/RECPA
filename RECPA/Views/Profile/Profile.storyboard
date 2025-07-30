@@ -20,7 +20,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="2500"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HUe-2d-u7e">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="2207.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="2287.5"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Profile cover banner" translatesAutoresizingMaskIntoConstraints="NO" id="4qj-ko-erp">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="120"/>
@@ -1234,7 +1234,7 @@
                                             <constraint firstAttribute="trailing" secondItem="4qj-ko-erp" secondAttribute="trailing" id="fhH-ks-03K"/>
                                             <constraint firstItem="rul-Xh-o6Y" firstAttribute="leading" secondItem="HUe-2d-u7e" secondAttribute="leading" id="flp-sx-Sws"/>
                                             <constraint firstItem="d95-43-cGn" firstAttribute="top" secondItem="FPd-4j-ZSy" secondAttribute="bottom" constant="5" id="ku2-eQ-thq"/>
-                                            <constraint firstAttribute="bottom" secondItem="0cw-Ky-aTW" secondAttribute="bottom" constant="20" id="nY2-K0-9Ns"/>
+                                            <constraint firstAttribute="bottom" secondItem="0cw-Ky-aTW" secondAttribute="bottom" constant="100" id="nY2-K0-9Ns"/>
                                             <constraint firstAttribute="trailing" secondItem="rZ9-qr-lLI" secondAttribute="trailing" id="rY1-tJ-weN"/>
                                             <constraint firstItem="wu6-Ry-eL5" firstAttribute="top" secondItem="rul-Xh-o6Y" secondAttribute="bottom" id="rxJ-nk-ZJM"/>
                                             <constraint firstItem="Umb-0T-wiF" firstAttribute="centerX" secondItem="4qj-ko-erp" secondAttribute="centerX" id="uuO-cr-5vN"/>
@@ -1263,11 +1263,13 @@
                     </view>
                     <size key="freeformSize" width="414" height="2500"/>
                     <connections>
-                        <outlet property="agentsButton" destination="xVW-PE-SLb" id="fgU-cF-6Wm"/>
+                        <outlet property="agentStackButton" destination="xVW-PE-SLb" id="zrV-iZ-hkh"/>
                         <outlet property="agentsInfo" destination="0cw-Ky-aTW" id="kdW-sL-rb0"/>
                         <outlet property="agentsTableHeight" destination="6Hu-Qt-DiK" id="Ys2-dV-pGy"/>
                         <outlet property="allAgentsTable" destination="njp-6s-8oT" id="Kpc-uj-2qd"/>
                         <outlet property="belowLabel" destination="rul-Xh-o6Y" id="ZRf-4c-cVn"/>
+                        <outlet property="coverImage" destination="4qj-ko-erp" id="ajW-ib-NJ0"/>
+                        <outlet property="coverImageHeight" destination="gUW-iY-6e9" id="qpO-n7-iIv"/>
                         <outlet property="personalInfo" destination="wu6-Ry-eL5" id="T5P-i2-zvf"/>
                         <outlet property="personalInfoButton" destination="M53-4C-ruO" id="92l-UA-hfH"/>
                         <outlet property="statInfo" destination="MFC-jg-DlV" id="OnS-Gx-vDy"/>

@@ -14,8 +14,7 @@ class DetsContainerVC: UIViewController {
     @IBOutlet weak var propInfoView: UIView!
     @IBOutlet weak var infoMainView: UIView!
     @IBOutlet weak var mainImageView: UIImageView!
-    @IBOutlet weak var infoCollection: UICollectionView!
-    @IBOutlet weak var infoCollectionHeight: NSLayoutConstraint!
+    @IBOutlet weak var mainImageHeight: NSLayoutConstraint!
     
     
     //Labels outlets:
@@ -33,13 +32,19 @@ class DetsContainerVC: UIViewController {
         super.viewDidLoad()
         
         addBorders()
-        updateCollectionViewHeight()
+        
+        let screenHeight = UIScreen.main.bounds.height
+        let dynamicHeight = screenHeight * 0.3
+        mainImageHeight.constant = dynamicHeight
+        view.layoutIfNeeded()
+        
     }
     
-    func updateCollectionViewHeight() {
-        infoCollection.layoutIfNeeded()
-        infoCollectionHeight.constant = infoCollection.collectionViewLayout.collectionViewContentSize.height
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
     }
+
+    
     
     override func viewWillAppear(_ animated: Bool) {
     }
@@ -61,20 +66,3 @@ class DetsContainerVC: UIViewController {
     }
 }
 
-extension DetsContainerVC:UICollectionViewDelegate, UICollectionViewDataSource{
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 6
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = infoCollection.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
-        
-        return cell
-    }
-}
-
-class InfoCollectionCell:UICollectionViewCell{
-    @IBOutlet weak var upperLabel: UILabel!
-    @IBOutlet weak var lowerLabel: UILabel!
-    @IBOutlet weak var imageView: UIImageView!
-}

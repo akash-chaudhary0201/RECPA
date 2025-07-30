@@ -53,11 +53,14 @@ class BasicInfoVC: UIViewController {
         "Arunachal Pradesh",
         "Assam",
     ]
-
+    
     var companyTypeDropDown = DropDown()
     var countriesDropDown = DropDown()
     var stateDropDown = DropDown()
     var citiesDropDown = DropDown()
+    
+    //Registration for model:
+    var formModel: RegistrationFormModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -85,6 +88,7 @@ class BasicInfoVC: UIViewController {
         
         addTapGestureToDismissKeyboard()
     }
+
     
     func addTapGestureToDismissKeyboard() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))

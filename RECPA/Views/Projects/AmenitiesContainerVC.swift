@@ -11,9 +11,9 @@ import SDWebImage
 class AmenitiesContainerVC: UIViewController {
     
     @IBOutlet weak var mainImageView: UIImageView!
+    @IBOutlet weak var mainImageHeight: NSLayoutConstraint!
     @IBOutlet weak var propInfoView: UIView!
     @IBOutlet weak var amenitiesMainView: UIView!
-    @IBOutlet weak var amenitiesCollection: UICollectionView!
     
     var projectId:String?
     
@@ -23,6 +23,12 @@ class AmenitiesContainerVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let screenHeight = UIScreen.main.bounds.height
+        let dynamicHeight = screenHeight * 0.3
+        
+        mainImageHeight.constant = dynamicHeight
+        view.layoutIfNeeded()
         
         addBorders()
     }
@@ -43,20 +49,4 @@ class AmenitiesContainerVC: UIViewController {
         amenitiesMainView.layer.cornerRadius = 40
         amenitiesMainView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
     }
-}
-
-extension AmenitiesContainerVC:UICollectionViewDelegate, UICollectionViewDataSource{
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 12
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = amenitiesCollection.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
-        
-        return cell
-    }
-}
-
-class AmenitiesCollectionCell:UICollectionViewCell{
-    
 }

@@ -6,13 +6,17 @@
 //
 
 import UIKit
+import SwiftyGif
 
 protocol SideMenuDelegate: AnyObject {
     func didSelectMenuItem(at index: Int)
 }
 
 class SideMenuEx: UIViewController {
-
+    
+    
+    @IBOutlet weak var closeImage: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         projectsDropDownView.isHidden = true
@@ -20,6 +24,13 @@ class SideMenuEx: UIViewController {
         
         leadsDropDownView.isHidden = true
         leadsDropDownViewHeight.constant = 0
+        
+        do {
+            let gif = try UIImage(gifName: "Close.gif")
+            closeImage.setGifImage(gif, loopCount: -1)
+        } catch {
+            print("Error loading GIF: \(error)")
+        }
     }
     
     weak var delegate: SideMenuDelegate?
@@ -39,7 +50,7 @@ class SideMenuEx: UIViewController {
     @IBOutlet weak var projectsView: UIView!
     @IBOutlet weak var leadsView: UIView!
     @IBOutlet weak var bookingsView: UIView!
-//    @IBOutlet weak var brokerageView: UIView!
+    //    @IBOutlet weak var brokerageView: UIView!
     @IBOutlet weak var offerView: UIView!
     @IBOutlet weak var engagementView: UIView!
     @IBOutlet weak var settingsView: UIView!
@@ -52,7 +63,7 @@ class SideMenuEx: UIViewController {
         leadsView.backgroundColor = .clear
         homeView.backgroundColor = .clear
         bookingsView.backgroundColor = .clear
-
+        
         offerView.backgroundColor = .clear
         engagementView.backgroundColor = .clear
         settingsView.backgroundColor = .clear
@@ -72,7 +83,7 @@ class SideMenuEx: UIViewController {
         leadsView.backgroundColor = .white
         homeView.backgroundColor = .clear
         bookingsView.backgroundColor = .clear
-
+        
         offerView.backgroundColor = .clear
         engagementView.backgroundColor = .clear
         settingsView.backgroundColor = .clear
@@ -94,7 +105,7 @@ class SideMenuEx: UIViewController {
         projectsView.backgroundColor = .clear
         leadsView.backgroundColor = .clear
         bookingsView.backgroundColor = .clear
-//        brokerageView.backgroundColor = .clear
+        //        brokerageView.backgroundColor = .clear
         offerView.backgroundColor = .clear
         engagementView.backgroundColor = .clear
         settingsView.backgroundColor = .clear
@@ -117,7 +128,7 @@ class SideMenuEx: UIViewController {
     // Highlights a specific view by setting its background color to white
     func highlightView(forTag tag: Int) {
         resetAllViewBackgrounds()
-
+        
         if let viewToHighlight = view.viewWithTag(tag) {
             viewToHighlight.backgroundColor = .white
         }
@@ -156,7 +167,7 @@ class SideMenuEx: UIViewController {
         case 7:
             highlightView(forTag: 11)
             print("ak")
-
+            
         default:
             break
         }

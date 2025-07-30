@@ -13,6 +13,9 @@ class ProfileVC: UIViewController {
     @IBOutlet weak var personalInfoButton: UIButton!
     @IBOutlet weak var statInfoButton: UIButton!
     @IBOutlet weak var agentsButton: UIButton!
+    @IBOutlet weak var coverImage: UIImageView!
+    @IBOutlet weak var coverImageHeight: NSLayoutConstraint!
+    
     
     @IBOutlet weak var agentsInfo: UIView!
     @IBOutlet weak var statInfo: UIView!
@@ -22,6 +25,9 @@ class ProfileVC: UIViewController {
     //Agents Info outlets:
     @IBOutlet weak var allAgentsTable: UITableView!
     @IBOutlet weak var agentsTableHeight: NSLayoutConstraint!
+    @IBOutlet weak var agentStackButton: UIButton!
+    
+    var userType:String?
     
     let borderTag = 999
     
@@ -32,6 +38,20 @@ class ProfileVC: UIViewController {
     var activeConstraints: [NSLayoutConstraint] = []
     
     override func viewDidLoad() {
+    
+        userType = UserDefaults.standard.string(forKey: "userType")
+        
+        if userType == "agent"{
+            agentStackButton.isHidden = true
+        }
+        allAgentsTable.separatorStyle = .none
+        
+        
+        let screenHeight = UIScreen.main.bounds.height
+        let dynamicHeight = screenHeight * 0.2
+        
+        coverImageHeight.constant = dynamicHeight
+        view.layoutIfNeeded()
         
         personalInfo.isHidden = false
         statInfo.isHidden = true

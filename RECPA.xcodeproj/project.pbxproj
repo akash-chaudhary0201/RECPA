@@ -11,12 +11,14 @@
 		B4138E692E2F515E00D0D80F /* SwiftLoader in Frameworks */ = {isa = PBXBuildFile; productRef = B4138E682E2F515E00D0D80F /* SwiftLoader */; };
 		B4138E6C2E2F521700D0D80F /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = B4138E6B2E2F521700D0D80F /* SDWebImage */; };
 		B4138E6E2E2F521700D0D80F /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = B4138E6D2E2F521700D0D80F /* SDWebImageMapKit */; };
+		B4B220D42E38C3410081C2CB /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4B220D32E38C3410081C2CB /* WebKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		4166B69D362175E5DF2AAE1B /* Pods-RECPA.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RECPA.release.xcconfig"; path = "Target Support Files/Pods-RECPA/Pods-RECPA.release.xcconfig"; sourceTree = "<group>"; };
 		95E31BF4B7EEAD518D79BAB5 /* Pods-RECPA.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RECPA.debug.xcconfig"; path = "Target Support Files/Pods-RECPA/Pods-RECPA.debug.xcconfig"; sourceTree = "<group>"; };
 		B4138CC22E2F4E4400D0D80F /* RECPA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RECPA.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B4B220D32E38C3410081C2CB /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		C73C541917FA98BC43DBD7AE /* Pods_RECPA.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RECPA.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -46,6 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B4B220D42E38C3410081C2CB /* WebKit.framework in Frameworks */,
 				B4138E6C2E2F521700D0D80F /* SDWebImage in Frameworks */,
 				2A6F40C6B90CD238BDF68218 /* Pods_RECPA.framework in Frameworks */,
 				B4138E6E2E2F521700D0D80F /* SDWebImageMapKit in Frameworks */,
@@ -59,6 +62,7 @@
 		95107F9D7946C9A276820144 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B4B220D32E38C3410081C2CB /* WebKit.framework */,
 				C73C541917FA98BC43DBD7AE /* Pods_RECPA.framework */,
 			);
 			name = Frameworks;

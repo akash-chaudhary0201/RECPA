@@ -12,6 +12,7 @@ class LocationContainerVC: UIViewController {
     
     @IBOutlet weak var propInfoView: UIView!
     @IBOutlet weak var mainImageView: UIImageView!
+    @IBOutlet weak var mainImageHeight: NSLayoutConstraint!
     
     var projectId:String?
     
@@ -23,6 +24,12 @@ class LocationContainerVC: UIViewController {
         super.viewDidLoad()
         
         addBorders()
+        
+        let screenHeight = UIScreen.main.bounds.height
+        let dynamicHeight = screenHeight * 0.3
+        
+        mainImageHeight.constant = dynamicHeight
+        view.layoutIfNeeded()
     }
     
     //Function to add borders:

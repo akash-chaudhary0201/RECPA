@@ -6,24 +6,21 @@
 //
 
 import UIKit
+import SwiftyGif
 
 class BookingsVC: UIViewController {
-
+    
+    @IBOutlet weak var comingSoon: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        do {
+            let gif = try UIImage(gifName: "cmm.gif")
+            comingSoon.setGifImage(gif, loopCount: -1)
+        } catch {
+            print("Error loading GIF: \(error)")
+        }
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

@@ -2,76 +2,68 @@ import UIKit
 
 class DatePickerHelper {
     
-    static func showCenteredDatePicker(
-        on viewController: UIViewController,
-        dateFormat: String = "dd MMM yyyy",
-        onDateSelected: @escaping (String) -> Void
-    ) {
-        // Background overlay
-        let overlayView = UIView()
-        overlayView.frame = viewController.view.bounds
-        overlayView.backgroundColor = UIColor.black.withAlphaComponent(0.3)
-        overlayView.alpha = 0
-        overlayView.translatesAutoresizingMaskIntoConstraints = false
-        
-        // Container for date picker
-        let containerView = UIView()
-        containerView.backgroundColor = .systemBackground
-        containerView.layer.cornerRadius = 16
-        containerView.translatesAutoresizingMaskIntoConstraints = false
+    static func showInlineDatePicker(centerIn parentView: UIView,
+                                     targetLabel: UILabel,
+                                     _ dateFormat: String) {
 
-        // Date Picker
+        let container = UIView()
+        container.translatesAutoresizingMaskIntoConstraints = false
+        container.backgroundColor = .systemGroupedBackground
+        container.layer.cornerRadius = 12
+        container.clipsToBounds = true
+
         let datePicker = UIDatePicker()
         datePicker.datePickerMode = .date
         datePicker.preferredDatePickerStyle = .inline
         datePicker.translatesAutoresizingMaskIntoConstraints = false
 
-        containerView.addSubview(datePicker)
-        overlayView.addSubview(containerView)
-        viewController.view.addSubview(overlayView)
+        let doneButton = UIButton(type: .system)
+        doneButton.setTitle("Done", for: .normal)
+        doneButton.layer.cornerRadius = 10
+        doneButton.translatesAutoresizingMaskIntoConstraints = false
 
-        // Constraints for date picker in container
+        container.addSubview(datePicker)
+        container.addSubview(doneButton)
+        parentView.addSubview(container)
+
         NSLayoutConstraint.activate([
-            datePicker.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 16),
-            datePicker.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -16),
-            datePicker.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 16),
-            datePicker.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16)
+            container.centerXAnchor.constraint(equalTo: parentView.centerXAnchor),
+            container.centerYAnchor.constraint(equalTo: parentView.centerYAnchor),
+            datePicker.topAnchor.constraint(equalTo: container.topAnchor),
+            datePicker.leadingAnchor.constraint(equalTo: container.leadingAnchor),
+            datePicker.trailingAnchor.constraint(equalTo: container.trailingAnchor),
+
+            doneButton.topAnchor.constraint(equalTo: datePicker.bottomAnchor, constant: 8),
+            doneButton.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: -8),
+            doneButton.centerXAnchor.constraint(equalTo: container.centerXAnchor)
         ])
 
-        // Constraints for centered container
-        NSLayoutConstraint.activate([
-            containerView.centerXAnchor.constraint(equalTo: overlayView.centerXAnchor),
-            containerView.centerYAnchor.constraint(equalTo: overlayView.centerYAnchor),
-            containerView.widthAnchor.constraint(equalToConstant: 320)
-        ])
+        let handler = DatePickerHandler(datePicker: datePicker, label: targetLabel, container: container, dateFormat: dateFormat)
+        doneButton.addTarget(handler, action: #selector(DatePickerHandler.doneButtonTapped(_:)), for: .touchUpInside)
 
-        // Constraints for overlay
-        NSLayoutConstraint.activate([
-            overlayView.topAnchor.constraint(equalTo: viewController.view.topAnchor),
-            overlayView.bottomAnchor.constraint(equalTo: viewController.view.bottomAnchor),
-            overlayView.leadingAnchor.constraint(equalTo: viewController.view.leadingAnchor),
-            overlayView.trailingAnchor.constraint(equalTo: viewController.view.trailingAnchor)
-        ])
+        objc_setAssociatedObject(doneButton, "handler", handler, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+    }
+}
 
-        // Fade-in animation
-        UIView.animate(withDuration: 0.25) {
-            overlayView.alpha = 1
-        }
 
-        // Handle date selection
-        datePicker.addAction(UIAction { _ in
-            let formatter = DateFormatter()
-            formatter.dateFormat = dateFormat
-            let formatted = formatter.string(from: datePicker.date)
+private class DatePickerHandler: NSObject {
+    let datePicker: UIDatePicker
+    let label: UILabel
+    let container: UIView
+    let dateFormat: String
 
-            onDateSelected(formatted)
+    init(datePicker: UIDatePicker, label: UILabel, container: UIView, dateFormat: String) {
+        self.datePicker = datePicker
+        self.label = label
+        self.container = container
+        self.dateFormat = dateFormat
+    }
 
-            // Fade out and remove
-            UIView.animate(withDuration: 0.25, animations: {
-                overlayView.alpha = 0
-            }, completion: { _ in
-                overlayView.removeFromSuperview()
-            })
-        }, for: .valueChanged)
+    @objc func doneButtonTapped(_ sender: UIButton) {
+        let formatter = DateFormatter()
+        formatter.dateFormat = dateFormat
+        label.text = formatter.string(from: datePicker.date)
+        label.textColor = .black
+        container.removeFromSuperview()
     }
 }

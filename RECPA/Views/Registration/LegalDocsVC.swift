@@ -5,18 +5,10 @@
 //  Created by Akash Chaudhary  on 17/06/25.
 //
 
-enum UploadedFileKey: String {
-    case pan = "uploadedPanFile"
-    case aadhar = "uploadedAadharFile"
-    case selfie = "uploadedSelfieFile"
-    case cheque = "uploadedChequeFile"
-    case reraCert = "uploadedReraCertFile"
-}
-
 import UIKit
 import UniformTypeIdentifiers
 
-class LegalDocsVC: UIViewController, UIDocumentPickerDelegate {
+class LegalDocsVC: UIViewController, UIDocumentPickerDelegate, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     
     @IBOutlet weak var selfieView: UIView?
     @IBOutlet weak var canceledChequeView: UIView?
@@ -41,6 +33,14 @@ class LegalDocsVC: UIViewController, UIDocumentPickerDelegate {
     var activeDateLabel:UILabel?
     
     var userType:String?
+    
+    //Text fields outlets:
+    @IBOutlet weak var panTextField: UITextField!
+    @IBOutlet weak var aadharTextField: UITextField!
+    @IBOutlet weak var gstTextField: UITextField!
+    @IBOutlet weak var reraTextField: UITextField!
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -120,18 +120,12 @@ class LegalDocsVC: UIViewController, UIDocumentPickerDelegate {
     
     //Function to open rera registration date selector:
     @IBAction func openReraRegDateSelector(_ sender: Any) {
-        DatePickerHelper.showCenteredDatePicker(on: self) { selectedDate in
-            self.reraRegDate?.text = selectedDate
-            self.reraRegDate?.textColor = .black
-        }
+        DatePickerHelper.showInlineDatePicker(centerIn: self.view, targetLabel: reraRegDate!, "dd-mm-yyyy")
     }
     
     //Function to open rera renewal date selector:
     @IBAction func openReraRenewDatePicker(_ sender: Any) {
-        DatePickerHelper.showCenteredDatePicker(on: self) { selectedDate in
-            self.reraRenewDate?.text = selectedDate
-            self.reraRenewDate?.textColor = .black
-        }
+        DatePickerHelper.showInlineDatePicker(centerIn: self.view, targetLabel: reraRenewDate!, "dd-mm-yyyy")
     }
     
     //Action to select rera certifdficate:
@@ -173,8 +167,42 @@ class LegalDocsVC: UIViewController, UIDocumentPickerDelegate {
     //Action to select selfie:
     @IBAction func selectSelfirFile(_ sender: Any) {
         currentFileTypeKey = .selfie
-        presentDocumentPicker()
+        
+        let alert = UIAlertController(title: "Upload Selfie", message: "Choose a source", preferredStyle: .actionSheet)
+        
+        alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
+            self.presentCamera()
+        }))
+        
+        alert.addAction(UIAlertAction(title: "File Picker", style: .default, handler: { _ in
+            self.presentDocumentPicker()
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        
+        if let popoverController = alert.popoverPresentationController {
+            popoverController.sourceView = self.view
+            popoverController.sourceRect = (sender as! UIView).bounds
+            popoverController.permittedArrowDirections = [.up, .down]
+        }
+        
+        present(alert, animated: true)
     }
+    
+    //Function to present camera:
+    func presentCamera() {
+        guard UIImagePickerController.isSourceTypeAvailable(.camera) else {
+            print("Camera not available on device")
+            return
+        }
+        
+        let picker = UIImagePickerController()
+        picker.sourceType = .camera
+        picker.delegate = self
+        picker.allowsEditing = false
+        present(picker, animated: true)
+    }
+    
     
     //Go to review information page:
     @IBAction func goToReviewInfo(_ sender: Any) {
@@ -193,16 +221,41 @@ class LegalDocsVC: UIViewController, UIDocumentPickerDelegate {
         let destinationURL = documentsURL.appendingPathComponent(selectedURL.lastPathComponent)
         
         do {
+            print("Source: \(selectedURL.path)")
+            print("Destination: \(destinationURL.path)")
+            
             if fileManager.fileExists(atPath: destinationURL.path) {
                 try fileManager.removeItem(at: destinationURL)
             }
             try fileManager.copyItem(at: selectedURL, to: destinationURL)
             
             UserDefaults.standard.set(destinationURL.path, forKey: fileTypeKey.rawValue)
-            print(" Saved \(fileTypeKey.rawValue) to: \(destinationURL.path)")
+            print("Saved \(fileTypeKey.rawValue) to: \(destinationURL.path)")
             
         } catch {
-            print("Error in file: \(error.localizedDescription)")
+            print("Error : \(error.localizedDescription)")
+        }
+    }
+    
+    //Delegate function for image click from camera:
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true)
+        
+        guard let image = info[.originalImage] as? UIImage,
+              let fileTypeKey = currentFileTypeKey else { return }
+        
+        guard let imageData = image.jpegData(compressionQuality: 0.8) else { return }
+        
+        let fileName = "\(UUID().uuidString).jpg"
+        let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let fileURL = documentsURL.appendingPathComponent(fileName)
+        
+        do {
+            try imageData.write(to: fileURL)
+            UserDefaults.standard.set(fileURL.path, forKey: fileTypeKey.rawValue)
+            print("Saved image to: \(fileURL.path)")
+        } catch {
+            print("Failed to save image: \(error.localizedDescription)")
         }
     }
     
